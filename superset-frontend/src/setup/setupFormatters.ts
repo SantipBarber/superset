@@ -24,12 +24,37 @@ import {
   getTimeFormatterRegistry,
   smartDateFormatter,
   smartDateVerboseFormatter,
+  createD3NumberFormatter,
 } from '@superset-ui/core';
 
 export default function setupFormatters() {
   getNumberFormatterRegistry()
     // Add shims for format strings that are deprecated or common typos.
     // Temporary solution until performing a db migration to fix this.
+    .registerValue(
+      'EuroDecimal',
+      createD3NumberFormatter({
+        locale: {
+          decimal: ',',
+          thousands: '.',
+          grouping: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          currency: ['', ' €'],
+        },
+        formatString: '$,.2f',
+      }),
+    )
+    .registerValue(
+      'EuroRounded',
+      createD3NumberFormatter({
+        locale: {
+          decimal: ',',
+          thousands: '.',
+          grouping: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          currency: ['', ' €'],
+        },
+        formatString: '$,.0f',
+      }),
+    )
     .registerValue(',0', getNumberFormatter(',.4~f'))
     .registerValue('null', getNumberFormatter(',.4~f'))
     .registerValue('%', getNumberFormatter('.0%'))
