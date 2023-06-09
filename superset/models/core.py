@@ -974,6 +974,8 @@ class Log(Model):  # pylint: disable=too-few-public-methods
     dttm = Column(DateTime, default=datetime.utcnow)
     duration_ms = Column(Integer)
     referrer = Column(String(1024))
+    remote_addr = Column(String(1024))
+    
 
 
 class FavStarClassName(str, enum.Enum):

@@ -345,6 +345,11 @@ class DBEventLogger(AbstractEventLogger):
         # pylint: disable=import-outside-toplevel
         from superset.models.core import Log
 
+        if request.headers.getlist("X-Forwarded-For"):
+            ip = request.headers.getlist("X-Forwarded-For")[0]
+        else:
+            ip = request.remote_addr 
+
         records = kwargs.get("records", [])
         logs = []
         for record in records:
@@ -361,6 +366,7 @@ class DBEventLogger(AbstractEventLogger):
                 duration_ms=duration_ms,
                 referrer=referrer,
                 user_id=user_id,
+                remote_addr=ip,
             )
             logs.append(log)
         try:
