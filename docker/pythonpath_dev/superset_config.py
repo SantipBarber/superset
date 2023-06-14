@@ -130,9 +130,6 @@ try:
 except ImportError:
     logger.info("Using default Docker config...")
 
-# Specify the App icon
-APP_ICON = "/static/assets/images/eticco_superset.jpg" 
-
 # This is merely a default.
 FEATURE_FLAGS: Dict[str, bool] = {}
 
