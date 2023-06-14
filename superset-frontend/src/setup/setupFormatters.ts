@@ -32,7 +32,7 @@ export default function setupFormatters() {
     // Add shims for format strings that are deprecated or common typos.
     // Temporary solution until performing a db migration to fix this.
     .registerValue(
-      'EuroDecimal',
+      'EUDecimal',
       createD3NumberFormatter({
         locale: {
           decimal: ',',
@@ -44,7 +44,7 @@ export default function setupFormatters() {
       }),
     )
     .registerValue(
-      'EuroRounded',
+      'EURounded',
       createD3NumberFormatter({
         locale: {
           decimal: ',',
@@ -53,6 +53,30 @@ export default function setupFormatters() {
           currency: ['', ' €'],
         },
         formatString: '$,.0f',
+      }),
+    )
+    .registerValue(
+      'SIRounded',
+      createD3NumberFormatter({
+        locale: {
+          decimal: ',',
+          thousands: '.',
+          grouping: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          currency: ['', ' €'],
+        },
+        formatString: ',.0f',
+      }),
+    )
+    .registerValue(
+      'SIDecimal',
+      createD3NumberFormatter({
+        locale: {
+          decimal: ',',
+          thousands: '.',
+          grouping: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+          currency: ['', ' €'],
+        },
+        formatString: ',.2f',
       }),
     )
     .registerValue(',0', getNumberFormatter(',.4~f'))
