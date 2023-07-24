@@ -210,7 +210,7 @@ DEFAULT_FEATURE_FLAGS: Dict[str, bool] = {
     "ENFORCE_DB_ENCRYPTION_UI": False,
     # Allow users to export full CSV of table viz type.
     # This could cause the server to run out of memory or compute.
-    "ALLOW_FULL_CSV_EXPORT": False,
+    "ALLOW_FULL_CSV_EXPORT": True,
     "UX_BETA": False,
     "GENERIC_CHART_AXES": False,
     "ALLOW_ADHOC_SUBQUERY": False,
@@ -226,6 +226,7 @@ DEFAULT_FEATURE_FLAGS: Dict[str, bool] = {
     "EMBEDDABLE_CHARTS": True,
     "DRILL_TO_DETAIL": False,
     "DATAPANEL_CLOSED_BY_DEFAULT": False,
+    "ENABLE_FILE_UPLOAD": True
 }
 
 # ---------------------------------------------------
@@ -248,3 +249,20 @@ LANGUAGES = {
 APP_ICON = "/static/assets/images/logo_bi_studio.png" 
 # Specify the App name
 APP_NAME = "BI Studio" 
+
+# Allowed format types for upload on Database view
+EXCEL_EXTENSIONS = {"xlsx", "xls"}
+CSV_EXTENSIONS = {"csv", "tsv", "txt"}
+COLUMNAR_EXTENSIONS = {"parquet", "zip"}
+ALLOWED_EXTENSIONS = {*EXCEL_EXTENSIONS, *CSV_EXTENSIONS, *COLUMNAR_EXTENSIONS}
+
+# CSV Options: key/value pairs that will be passed as argument to DataFrame.to_csv
+# method.
+# note: index option should not be overridden
+CSV_EXPORT = {"encoding": "utf-8"}
+
+# Excel Options: key/value pairs that will be passed as argument to DataFrame.to_excel
+# method.
+# note: index option should not be overridden
+EXCEL_EXPORT = {"encoding": "utf-8"}
+
